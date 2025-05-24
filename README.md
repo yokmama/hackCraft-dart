@@ -20,16 +20,31 @@ dependencies:
 ## Usage
 
 ```dart
-import 'package:hackcraft/hackcraft.dart';
+import 'dart:async';
+import 'package:hackcraft/src/hackcraft_client.dart';
 
-void main() {
-  // Add your example code here
+Future<void> main() async {
+  // プレイヤーを生成
+  final player = Player('your name');
+
+  // サーバーにログイン
+  await player.login('localhost', 25570);
+
+  // エンティティを取得
+  final hello = await player.getEntity('your pet');
+
+  // メッセージを送信
+  await hello.say('hello world');
+
+  // ログアウト
+  await player.logout();
 }
+
 ```
 
 ## Additional information
 
-For more information about this package, please visit the [GitHub repository](https://github.com/yourusername/hackcraft-dart).
+For more information about this package, please visit the [GitHub repository](https://github.com/yokmama/hackCraft-dart).
 
 ## License
 

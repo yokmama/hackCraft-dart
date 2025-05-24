@@ -3,16 +3,16 @@ import 'package:hackcraft/src/hackcraft_client.dart';
 
 Future<void> main() async {
   // プレイヤーを生成
-  final player = Player('o2nerocha');
+  final player = Player('your name');
 
   // サーバーにログイン
   await player.login('localhost', 25570);
 
   // エンティティを取得
-  final hello = await player.getEntity('hello');
+  final hello = await player.getEntity('your pet');
 
   // メッセージを送信
-  for(var i=0; i<5; i++){
+  for (var i = 0; i < 5; i++) {
     await hello.digDown();
     await hello.dig();
     await hello.forward();
