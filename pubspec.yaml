@@ -1,8 +1,8 @@
 name: hackcraft
 description: A Dart library for Minecraft hacking and automation.
 version: 0.0.1
-repository: https://github.com/yourusername/hackcraft-dart
-homepage: https://github.com/yourusername/hackcraft-dart
+repository: https://github.com/yokmama/hackCraft-dart
+homepage: https://github.com/yokmama/hackCraft-dart
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
