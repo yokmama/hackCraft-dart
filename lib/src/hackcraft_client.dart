@@ -52,9 +52,9 @@ class WebSocketMessageError extends Error {
 
 /// Defines Minecraft coordinate types.
 class CoordinateType {
-  static const String absolute = "";
-  static const String relative = "~";
-  static const String local = "^";
+  static const String absolute = '';
+  static const String relative = '~';
+  static const String local = '^';
 }
 
 /// Represents coordinate data with a type.
@@ -84,38 +84,36 @@ class Coordinates {
 
 /// Represents block placement sides.
 class Side {
-  static const String right = "Right";
-  static const String left = "Left";
-  static const String front = "Front";
-  static const String back = "Back";
-  static const String top = "Top";
-  static const String bottom = "Bottom";
+  static const String right = 'Right';
+  static const String left = 'Left';
+  static const String front = 'Front';
+  static const String back = 'Back';
+  static const String top = 'Top';
+  static const String bottom = 'Bottom';
 }
 
 // --- Data Classes (Models) ---
 
 /// Represents a location in the Minecraft world.
 class Location {
+  const Location({
+    required this.x,
+    required this.y,
+    required this.z,
+    this.world = 'world',
+  });
+
   final int x;
   final int y;
   final int z;
   final String world;
 
-  Location({
-    required this.x,
-    required this.y,
-    required this.z,
-    this.world = "world",
-  });
-
-  factory Location.fromJson(Map<String, dynamic> json) {
-    return Location(
-      x: json['x'] as int,
-      y: json['y'] as int,
-      z: json['z'] as int,
-      world: json['world'] as String? ?? 'world',
-    );
-  }
+  factory Location.fromJson(Map<String, dynamic> json) => Location(
+        x: json['x'] as int,
+        y: json['y'] as int,
+        z: json['z'] as int,
+        world: json['world'] as String? ?? 'world',
+      );
 
   Map<String, dynamic> toJson() => {
         'x': x,
@@ -127,6 +125,20 @@ class Location {
 
 /// Represents an interaction event.
 class InteractEvent {
+  const InteractEvent({
+    required this.action,
+    required this.player,
+    required this.playerUuid,
+    required this.event,
+    required this.name,
+    required this.type,
+    this.data = 0,
+    this.world = 'world',
+    this.x = 0,
+    this.y = 0,
+    this.z = 0,
+  });
+
   final String action;
   final String player;
   final String playerUuid;
@@ -139,108 +151,103 @@ class InteractEvent {
   final int y;
   final int z;
 
-  InteractEvent({
-    required this.action,
-    required this.player,
-    required this.playerUuid,
-    required this.event,
-    required this.name,
-    required this.type,
-    this.data = 0,
-    this.world = "world",
-    this.x = 0,
-    this.y = 0,
-    this.z = 0,
-  });
-
-  factory InteractEvent.fromJson(Map<String, dynamic> json) {
-    return InteractEvent(
-      action: json['action'] as String,
-      player: json['player'] as String,
-      playerUuid: json['player_uuid'] as String,
-      event: json['event'] as String,
-      name: json['name'] as String,
-      type: json['type'] as String,
-      data: json['data'] as int? ?? 0,
-      world: json['world'] as String? ?? "world",
-      x: json['x'] as int? ?? 0,
-      y: json['y'] as int? ?? 0,
-      z: json['z'] as int? ?? 0,
-    );
-  }
+  factory InteractEvent.fromJson(Map<String, dynamic> json) => InteractEvent(
+        action: json['action'] as String,
+        player: json['player'] as String,
+        playerUuid: json['player_uuid'] as String,
+        event: json['event'] as String,
+        name: json['name'] as String,
+        type: json['type'] as String,
+        data: json['data'] as int? ?? 0,
+        world: json['world'] as String? ?? 'world',
+        x: json['x'] as int? ?? 0,
+        y: json['y'] as int? ?? 0,
+        z: json['z'] as int? ?? 0,
+      );
 }
 
 /// Represents a custom event message.
 class EventMessage {
-  final String entityUuid;
-  final String sender;
-  final String uuid;
-  final String message;
-
-  EventMessage({
+  const EventMessage({
     required this.entityUuid,
     required this.sender,
     required this.uuid,
     required this.message,
   });
 
-  factory EventMessage.fromJson(Map<String, dynamic> json) {
-    return EventMessage(
-      entityUuid: json['entityUuid'] as String,
-      sender: json['sender'] as String,
-      uuid: json['uuid'] as String,
-      message: json['message'] as String,
-    );
-  }
+  final String entityUuid;
+  final String sender;
+  final String uuid;
+  final String message;
+
+  factory EventMessage.fromJson(Map<String, dynamic> json) => EventMessage(
+        entityUuid: json['entityUuid'] as String,
+        sender: json['sender'] as String,
+        uuid: json['uuid'] as String,
+        message: json['message'] as String,
+      );
 }
 
 /// Represents a chat message from a player.
 class ChatMessage {
-  final String player;
-  final String uuid;
-  final String entityUuid;
-  final String message;
-
-  ChatMessage({
+  const ChatMessage({
     required this.player,
     required this.uuid,
     required this.entityUuid,
     required this.message,
   });
 
-  factory ChatMessage.fromJson(Map<String, dynamic> json) {
-    return ChatMessage(
-      player: json['player'] as String,
-      uuid: json['uuid'] as String,
-      entityUuid: json['entityUuid'] as String,
-      message: json['message'] as String,
-    );
-  }
+  final String player;
+  final String uuid;
+  final String entityUuid;
+  final String message;
+
+  factory ChatMessage.fromJson(Map<String, dynamic> json) => ChatMessage(
+        player: json['player'] as String,
+        uuid: json['uuid'] as String,
+        entityUuid: json['entityUuid'] as String,
+        message: json['message'] as String,
+      );
 }
 
 /// Represents a change in Redstone power.
 class RedstonePower {
-  final String entityUuid;
-  final int oldCurrent;
-  final int newCurrent;
-
-  RedstonePower({
+  const RedstonePower({
     required this.entityUuid,
     required this.oldCurrent,
     required this.newCurrent,
   });
 
-  factory RedstonePower.fromJson(Map<String, dynamic> json) {
-    return RedstonePower(
-      entityUuid: json['entityUuid'] as String,
-      oldCurrent: json['oldCurrent'] as int,
-      newCurrent: json['newCurrent'] as int,
-    );
-  }
+  final String entityUuid;
+  final int oldCurrent;
+  final int newCurrent;
+
+  factory RedstonePower.fromJson(Map<String, dynamic> json) => RedstonePower(
+        entityUuid: json['entityUuid'] as String,
+        oldCurrent: json['oldCurrent'] as int,
+        newCurrent: json['newCurrent'] as int,
+      );
 }
 
 /// Represents a block in the Minecraft world.
 class Block {
+  const Block({
+    required this.name,
+    this.type = 'block',
+    this.data = 0,
+    this.isLiquid = false,
+    this.isAir = false,
+    this.isBurnable = false,
+    this.isFuel = false,
+    this.isOccluding = false,
+    this.isSolid = false,
+    this.isPassable = false,
+    this.x = 0,
+    this.y = 0,
+    this.z = 0,
+    this.world = 'world',
+  });
+
   final String name;
   final String type;
   final int data;
@@ -256,62 +263,41 @@ class Block {
   final int z;
   final String world;
 
-  Block({
-    required this.name,
-    this.type = "block",
-    this.data = 0,
-    this.isLiquid = false,
-    this.isAir = false,
-    this.isBurnable = false,
-    this.isFuel = false,
-    this.isOccluding = false,
-    this.isSolid = false,
-    this.isPassable = false,
-    this.x = 0,
-    this.y = 0,
-    this.z = 0,
-    this.world = "world",
-  });
-
-  factory Block.fromJson(Map<String, dynamic> json) {
-    return Block(
-      name: json['name'] as String,
-      type: json['type'] as String? ?? "block",
-      data: json['data'] as int? ?? 0,
-      isLiquid: json['isLiquid'] as bool? ?? false,
-      isAir: json['isAir'] as bool? ?? false,
-      isBurnable: json['isBurnable'] as bool? ?? false,
-      isFuel: json['isFuel'] as bool? ?? false,
-      isOccluding: json['isOccluding'] as bool? ?? false,
-      isSolid: json['isSolid'] as bool? ?? false,
-      isPassable: json['isPassable'] as bool? ?? false,
-      x: json['x'] as int? ?? 0,
-      y: json['y'] as int? ?? 0,
-      z: json['z'] as int? ?? 0,
-      world: json['world'] as String? ?? "world",
-    );
-  }
+  factory Block.fromJson(Map<String, dynamic> json) => Block(
+        name: json['name'] as String,
+        type: json['type'] as String? ?? 'block',
+        data: json['data'] as int? ?? 0,
+        isLiquid: json['isLiquid'] as bool? ?? false,
+        isAir: json['isAir'] as bool? ?? false,
+        isBurnable: json['isBurnable'] as bool? ?? false,
+        isFuel: json['isFuel'] as bool? ?? false,
+        isOccluding: json['isOccluding'] as bool? ?? false,
+        isSolid: json['isSolid'] as bool? ?? false,
+        isPassable: json['isPassable'] as bool? ?? false,
+        x: json['x'] as int? ?? 0,
+        y: json['y'] as int? ?? 0,
+        z: json['z'] as int? ?? 0,
+        world: json['world'] as String? ?? 'world',
+      );
 }
 
 /// Represents an item stack in an inventory.
 class ItemStack {
+  const ItemStack({
+    this.slot = 0,
+    this.name = 'air',
+    this.amount = 0,
+  });
+
   final int slot;
   final String name;
   final int amount;
 
-  ItemStack({
-    this.slot = 0,
-    this.name = "air",
-    this.amount = 0,
-  });
-
-  factory ItemStack.fromJson(Map<String, dynamic> json) {
-    return ItemStack(
-      slot: json['slot'] as int? ?? 0,
-      name: json['name'] as String? ?? "air",
-      amount: json['amount'] as int? ?? 0,
-    );
-  }
+  factory ItemStack.fromJson(Map<String, dynamic> json) => ItemStack(
+        slot: json['slot'] as int? ?? 0,
+        name: json['name'] as String? ?? 'air',
+        amount: json['amount'] as int? ?? 0,
+      );
 }
 
 // --- WebSocket Client ---
@@ -796,28 +782,33 @@ class Inventory {
 
 // --- Volume Class ---
 class Volume {
+  const Volume._(this.pos1, this.pos2);
+
   final CoordinateData pos1;
   final CoordinateData pos2;
 
-  Volume._(this.pos1, this.pos2);
-
   factory Volume(
-      int x1, int y1, int z1, int x2, int y2, int z2, String coordType) {
-    return Volume._(CoordinateData(x1, y1, z1, coordType),
-        CoordinateData(x2, y2, z2, coordType));
-  }
+    int x1,
+    int y1,
+    int z1,
+    int x2,
+    int y2,
+    int z2,
+    String coordType,
+  ) =>
+      Volume._(
+        CoordinateData(x1, y1, z1, coordType),
+        CoordinateData(x2, y2, z2, coordType),
+      );
 
-  static Volume absolute(int x1, int y1, int z1, int x2, int y2, int z2) {
-    return Volume(x1, y1, z1, x2, y2, z2, CoordinateType.absolute);
-  }
+  static Volume absolute(int x1, int y1, int z1, int x2, int y2, int z2) =>
+      Volume(x1, y1, z1, x2, y2, z2, CoordinateType.absolute);
 
-  static Volume relative(int x1, int y1, int z1, int x2, int y2, int z2) {
-    return Volume(x1, y1, z1, x2, y2, z2, CoordinateType.relative);
-  }
+  static Volume relative(int x1, int y1, int z1, int x2, int y2, int z2) =>
+      Volume(x1, y1, z1, x2, y2, z2, CoordinateType.relative);
 
-  static Volume local(int x1, int y1, int z1, int x2, int y2, int z2) {
-    return Volume(x1, y1, z1, x2, y2, z2, CoordinateType.local);
-  }
+  static Volume local(int x1, int y1, int z1, int x2, int y2, int z2) =>
+      Volume(x1, y1, z1, x2, y2, z2, CoordinateType.local);
 }
 
 // --- Entity Class ---
