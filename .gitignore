@@ -1,0 +1,20 @@
+# Dart specific
+.dart_tool/
+.packages
+build/
+pubspec.lock
+
+# IDE specific
+.idea/
+.vscode/
+*.iml
+*.iws
+.DS_Store
+
+# Coverage
+coverage/
+*.lcov
+
+# Generated files
+*.g.dart
+*.freezed.dart 
